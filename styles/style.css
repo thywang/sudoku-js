@@ -1,0 +1,25 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border-spacing: 0px;
+}
+
+.sudoku-solver {
+    margin: auto;
+    width: 50%;
+}
+
+.sudoku-board {
+    width: 540px;
+    height: 540px;
+}
+
+.sudoku-board input {
+    text-align: center;
+    width: 60px; /* 9 squares fit in row */
+    height: 60px; /* 9 squares fit in col */
+    font-size: 30px;
+    border: 1px dimgray solid;
+}
