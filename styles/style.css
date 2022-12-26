@@ -21,5 +21,13 @@
     width: 60px; /* 9 squares fit in row */
     height: 60px; /* 9 squares fit in col */
     font-size: 30px;
-    border: 1px dimgray solid;
+    border: 0.5px dimgray solid;
+}
+
+/* top right bottom left */
+.thicker-border-left {
+    border-left: 2px solid !important;
+}
+.thicker-border-below {
+    border-bottom: 2px solid !important;
 }
