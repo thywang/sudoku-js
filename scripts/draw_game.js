@@ -1,4 +1,7 @@
+import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
+
 var digitSelected = null
+var solved = null
 
 function drawBoard() {
     const board = document.querySelector("#sudoku-board")
@@ -57,9 +60,10 @@ function selectDigit() {
 
 export function fillBoard(puzzle) {
     const squares = document.querySelectorAll("#sudoku-board .square")
+    const flattenedPuzzle = puzzle.flat(1)
     for (let i = 0; i < squares.length; i++) {
-        if (puzzle[i] != 0) {
-            squares[i].innerText = puzzle[i]
+        if (flattenedPuzzle[i] != 0) {
+            squares[i].innerText = flattenedPuzzle[i]
             squares[i].classList.add("prefilled")
         } else {
             squares[i].innerText = ""
@@ -71,4 +75,11 @@ export function fillBoard(puzzle) {
 export function drawGame() {
     drawBoard()
     drawDigits()
+}
+
+export function setGame() {
+    let puzzle = loadRandomBoard()
+    fillBoard(puzzle)
+    const copy = puzzle.map((item) => item.slice()); // create copy of puzzle to solve
+    solved = loadSolvedBoard(copy).flat(1) // current solution
 }

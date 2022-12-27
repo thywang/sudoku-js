@@ -1,3 +1,5 @@
+import { solve } from "./solver.js"
+
 const boards = [
     [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
@@ -27,10 +29,12 @@ const SIZE = boards.length;
 export function loadRandomBoard() {
     let idx = Math.floor(Math.random() * SIZE)
     let chosenBoard = boards[idx]
-    let flattenedBoard = chosenBoard.flat(1)
-    return flattenedBoard
+    return chosenBoard
 }
 
-function loadSolvedBoard() {
-
+export function loadSolvedBoard(puzzle) {
+    let toSolve = puzzle
+    solve(toSolve)
+    // puzzle now solved
+    return toSolve
 }

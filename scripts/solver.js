@@ -53,7 +53,7 @@ function is_possible(board, row, col, n) {
 }
 
 // This function solves a 9x9 sudoku puzzle
-function solve(board) {
+export function solve(board) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             // if cell is empty
@@ -96,7 +96,7 @@ function print_board(board) {
         }
         output += "|\n"
         if (y + 1 < 9 && (y + 1) % 3 == 0) {
-            for (i = 0; i < 19; i++){
+            for (let i = 0; i < 19; i++){
                 output += "- "
             }
             output += "\n"
