@@ -1,33 +1,74 @@
-
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0 auto;
+    padding: 0;
     box-sizing: border-box;
-    border-spacing: 0px;
+    border-spacing: 0;
 }
 
-.sudoku-solver {
-    margin: auto;
-    width: 50%;
+main {
+    display: flex;
+}
+
+.game-button {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .sudoku-board {
-    width: 540px;
-    height: 540px;
+    width: 450px;
+    height: 450px;
+
+    /* create rows and cols */
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.sudoku-board input {
-    text-align: center;
-    width: 60px; /* 9 squares fit in row */
-    height: 60px; /* 9 squares fit in col */
-    font-size: 30px;
+.square {
+    width: 50px; /* 9 squares fit in row */
+    height: 50px; /* 9 squares fit in col */
     border: 0.5px dimgray solid;
+
+    /* text */
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* top right bottom left */
-.thicker-border-left {
-    border-left: 2px solid !important;
+.thicker-border-right {
+    border-right: 2px solid;
 }
 .thicker-border-below {
-    border-bottom: 2px solid !important;
+    border-bottom: 2px solid;
+}
+
+.digits {
+    width: 450px;
+    height: 50px;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.digit {
+    width: 50px;
+    height: 50px;
+    border: 1px white;
+    margin: 0px;
+
+    /* text */
+    font-size: 30px;
+    color: darkblue;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.digit-selected {
+    background-color: lightgray;
 }
