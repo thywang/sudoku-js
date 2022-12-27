@@ -25,19 +25,12 @@ const boards = [
 const SIZE = boards.length;
 
 export function loadRandomBoard() {
-    const inputs = document.querySelectorAll("input")
     let idx = Math.floor(Math.random() * SIZE)
     let chosenBoard = boards[idx]
     let flattenedBoard = chosenBoard.flat(1)
+    return flattenedBoard
+}
 
-    for (let i = 0; i < flattenedBoard.length; i++) {
-        if (flattenedBoard[i] == 0) {
-            inputs[i].value = ""
-            inputs[i].disabled = false
-        } else {
-            inputs[i].value = flattenedBoard[i]
-            inputs[i].disabled = true
-        }
-    }
-    return chosenBoard
+function loadSolvedBoard() {
+
 }

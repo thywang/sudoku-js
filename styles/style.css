@@ -46,6 +46,10 @@ main {
     border-bottom: 2px solid;
 }
 
+.prefilled {
+    background-color: whitesmoke;
+}
+
 .digits {
     width: 450px;
     height: 50px;

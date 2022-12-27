@@ -20,7 +20,9 @@ function drawBoard() {
 }
 
 function selectSquare() {
-    console.log("square selected")
+    if (digitSelected && this.innerText == "") {
+        this.innerText = digitSelected.id
+    }
 }
 
 function drawDigits() {
@@ -29,7 +31,7 @@ function drawDigits() {
     for (let i = 1; i <= 9; i++) {
         const digit = document.createElement("div")
         digit.id = i
-        digit.innerHTML = i
+        digit.innerText = i
         digit.addEventListener("click", selectDigit)
         digit.classList.add("digit")
         digits.append(digit)
@@ -40,6 +42,7 @@ function selectDigit() {
     if (digitSelected == this) { // digit already selected so toggle on or off
         if (digitSelected.classList.contains("digit-selected")) {
             digitSelected.classList.remove("digit-selected")
+            digitSelected = null // digit unselected so shouldn't draw any values
         } else {
             digitSelected.classList.add("digit-selected")
         }
@@ -49,6 +52,19 @@ function selectDigit() {
         }
         digitSelected = this
         digitSelected.classList.add("digit-selected")
+    }
+}
+
+export function fillBoard(puzzle) {
+    const squares = document.querySelectorAll("#sudoku-board .square")
+    for (let i = 0; i < squares.length; i++) {
+        if (puzzle[i] != 0) {
+            squares[i].innerText = puzzle[i]
+            squares[i].classList.add("prefilled")
+        } else {
+            squares[i].innerText = ""
+            squares[i].classList.remove("prefilled")
+        }
     }
 }
 
