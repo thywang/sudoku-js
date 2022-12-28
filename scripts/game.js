@@ -1,11 +1,13 @@
 import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
 
+/* global variable declarations */
 var digitSelected = null
 var solution = null
 var errors = 0
 
 const error = document.querySelector("#error-count")
 
+/* error functions */
 function updateErrors() {
     error.innerText = errors
 }
@@ -15,6 +17,7 @@ function resetAndUpdateErrors() {
     updateErrors()
 }
 
+/* function to draw empty board */
 function drawBoard() {
     const board = document.querySelector("#sudoku-board")
 
@@ -35,6 +38,7 @@ function drawBoard() {
     }
 }
 
+/* function to input a value in the board */
 function selectSquare() {
     if (digitSelected && this.innerText == "") {
         // pos: ["0","0"], ["0","1"], ... ["9","9"]
@@ -52,6 +56,7 @@ function selectSquare() {
     }
 }
 
+/* function to draw available values to input */
 function drawDigits() {
     const digits = document.querySelector("#digits")
 
@@ -65,6 +70,7 @@ function drawDigits() {
     }
 }
 
+/* function to select an available value to input */
 function selectDigit() {
     if (digitSelected == this) { // digit already selected so toggle on or off
         if (digitSelected.classList.contains("digit-selected")) {
@@ -82,6 +88,7 @@ function selectDigit() {
     }
 }
 
+/* function to fill the Sudoku board with values of a puzzle */
 export function fillBoard(puzzle) {
     const squares = document.querySelectorAll("#sudoku-board .square")
     const flattenedPuzzle = puzzle.flat(1)
@@ -96,6 +103,7 @@ export function fillBoard(puzzle) {
     }
 }
 
+/* main game functions */
 export function drawGame() {
     resetAndUpdateErrors()
     drawBoard()
@@ -108,4 +116,8 @@ export function setGame() {
     fillBoard(puzzle)
     const copy = puzzle.map((item) => item.slice()); // create copy of puzzle to solve
     solution = loadSolvedBoard(copy) // current solution
+}
+
+export function solveGame() {
+    fillBoard(solution)
 }
