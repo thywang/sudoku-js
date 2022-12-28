@@ -37,6 +37,7 @@ main {
 .sudoku-board {
     width: 450px;
     height: 450px;
+    cursor: default;
 
     /* create rows and cols */
     display: flex;
@@ -58,14 +59,18 @@ main {
 
 /* top right bottom left */
 .thicker-border-right {
-    border-right: 2px solid;
+    border-right: 2px black solid;
 }
 .thicker-border-below {
-    border-bottom: 2px solid;
+    border-bottom: 2px black solid;
 }
 
 .prefilled {
     background-color: whitesmoke;
+}
+
+.square-selected {
+    background-color: lightgray;
 }
 
 .digits {
@@ -94,4 +99,9 @@ main {
 
 .digit-selected {
     background-color: lightgray;
+}
+
+/* additional features */
+.error {
+    color: crimson;
 }

@@ -2,6 +2,7 @@ import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
 
 /* global variable declarations */
 var digitSelected = null
+var squareSelected = null
 var solution = null
 var errors = 0
 
@@ -40,16 +41,31 @@ function drawBoard() {
 
 /* function to input a value in the board */
 function selectSquare() {
-    if (digitSelected && this.innerText == "") {
+    if (squareSelected != null) {
+        squareSelected.classList.remove("square-selected")
+    }
+    squareSelected = this
+    squareSelected.classList.add("square-selected")
+    
+    fillSquare(this)
+}
+
+/* function to input value if it's correct or input and highlight as incorrect */
+function fillSquare(square) {
+    if (digitSelected && square.innerText == "" || digitSelected && square.classList.contains("error")) {
         // pos: ["0","0"], ["0","1"], ... ["9","9"]
-        const pos = this.id.split("-")
+        const pos = square.id.split("-")
         const row = parseInt(pos[0])
         const col = parseInt(pos[1])
         const input = parseInt(digitSelected.id)
         
         if (solution[row][col] == input) {
-            this.innerText = digitSelected.id
+            square.innerText = digitSelected.id
+            square.classList.remove("error")
+            squareSelected.classList.remove("square-selected")
         } else {
+            square.innerText = digitSelected.id
+            square.classList.add("error")
             errors = errors + 1
             updateErrors()
         }
@@ -93,6 +109,7 @@ export function fillBoard(puzzle) {
     const squares = document.querySelectorAll("#sudoku-board .square")
     const flattenedPuzzle = puzzle.flat(1)
     for (let i = 0; i < squares.length; i++) {
+        squares[i].classList.remove("error") // remove error property
         if (flattenedPuzzle[i] != 0) {
             squares[i].innerText = flattenedPuzzle[i]
             squares[i].classList.add("prefilled")
