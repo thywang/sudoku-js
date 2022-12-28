@@ -5,17 +5,45 @@ var digitSelected = null
 var squareSelected = null
 var solution = null
 var errors = 0
+var tally = new Array(10) // keeps track of number of times a digit correctly appears on the board
 
 const error = document.querySelector("#error-count")
 
 /* error functions */
-function updateErrors() {
+function updateErrors(value) {
+    errors = value
     error.innerText = errors
 }
 
-function resetAndUpdateErrors() {
-    errors = 0
-    updateErrors()
+/* tally functions */
+function resetTally() {
+    tally = new Array(10).fill(0) // real index actually start from 1
+}
+
+/* function to hide digit */
+function hideDigitSelected() {
+    digitSelected.classList.add("hide-digit")
+    digitSelected = null
+}
+
+/* function to unhide hidden digits */
+function resetDigits() {
+    const digits = document.querySelector("#digits")
+    for (const digit of digits.childNodes) {
+        digit.classList.remove("hide-digit")
+        digit.classList.remove("digit-selected")
+    }
+}
+
+/* function to return a tally of digits in the board */
+function calculateTally(board) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (board[i][j] != 0) {
+                tally[board[i][j]]++
+            }
+        }
+    }
 }
 
 /* function to draw empty board */
@@ -59,15 +87,18 @@ function fillSquare(square) {
         const col = parseInt(pos[1])
         const input = parseInt(digitSelected.id)
         
-        if (solution[row][col] == input) {
+        if (solution[row][col] == input) { // correct
             square.innerText = digitSelected.id
             square.classList.remove("error")
-            squareSelected.classList.remove("square-selected")
-        } else {
+            squareSelected.classList.remove("square-selected") // unselect any squares
+            tally[parseInt(digitSelected.id)]++ // update tally
+            if (tally[parseInt(digitSelected.id)] == 9) { // all occurrences of the digit has been correctly placed
+                hideDigitSelected()
+            }
+        } else { // incorrect
             square.innerText = digitSelected.id
             square.classList.add("error")
-            errors = errors + 1
-            updateErrors()
+            updateErrors(errors + 1)
         }
     }
 }
@@ -122,16 +153,21 @@ export function fillBoard(puzzle) {
 
 /* main game functions */
 export function drawGame() {
-    resetAndUpdateErrors()
+    updateErrors(0)
     drawBoard()
     drawDigits()
 }
 
 export function setGame() {
-    resetAndUpdateErrors()
+    /* reset functions */
+    updateErrors(0)
+    resetTally()
+    resetDigits()
+
     let puzzle = loadRandomBoard()
     fillBoard(puzzle)
     const copy = puzzle.map((item) => item.slice()); // create copy of puzzle to solve
+    calculateTally(copy) // current tally
     solution = loadSolvedBoard(copy) // current solution
 }
 
