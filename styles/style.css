@@ -9,6 +9,23 @@ main {
     display: flex;
 }
 
+.game-menu {
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+#error-count {
+    /* text */
+    color: crimson;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .game-button {
     width: 450px;
     display: flex;

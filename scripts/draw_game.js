@@ -1,7 +1,19 @@
 import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
 
 var digitSelected = null
-var solved = null
+var solution = null
+var errors = 0
+
+const error = document.querySelector("#error-count")
+
+function updateErrors() {
+    error.innerText = errors
+}
+
+function resetAndUpdateErrors() {
+    errors = 0
+    updateErrors()
+}
 
 function drawBoard() {
     const board = document.querySelector("#sudoku-board")
@@ -9,6 +21,7 @@ function drawBoard() {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             const square = document.createElement("div")
+            square.id = i.toString() + "-" + j.toString()
             square.addEventListener("click", selectSquare)
             square.classList.add("square")
             if (i == 2 || i == 5) {
@@ -24,7 +37,18 @@ function drawBoard() {
 
 function selectSquare() {
     if (digitSelected && this.innerText == "") {
-        this.innerText = digitSelected.id
+        // pos: ["0","0"], ["0","1"], ... ["9","9"]
+        const pos = this.id.split("-")
+        const row = parseInt(pos[0])
+        const col = parseInt(pos[1])
+        const input = parseInt(digitSelected.id)
+        
+        if (solution[row][col] == input) {
+            this.innerText = digitSelected.id
+        } else {
+            errors = errors + 1
+            updateErrors()
+        }
     }
 }
 
@@ -73,13 +97,15 @@ export function fillBoard(puzzle) {
 }
 
 export function drawGame() {
+    resetAndUpdateErrors()
     drawBoard()
     drawDigits()
 }
 
 export function setGame() {
+    resetAndUpdateErrors()
     let puzzle = loadRandomBoard()
     fillBoard(puzzle)
     const copy = puzzle.map((item) => item.slice()); // create copy of puzzle to solve
-    solved = loadSolvedBoard(copy).flat(1) // current solution
+    solution = loadSolvedBoard(copy) // current solution
 }
