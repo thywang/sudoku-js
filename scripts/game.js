@@ -33,6 +33,7 @@ function resetDigits() {
         digit.classList.remove("hide-digit")
         digit.classList.remove("digit-selected")
     }
+    digitSelected = null
 }
 
 /* function to return a tally of digits in the board */
@@ -75,30 +76,32 @@ function selectSquare() {
     squareSelected = this
     squareSelected.classList.add("square-selected")
     
-    fillSquare(this)
+    selectSquareMaybeFillSquare(this)
 }
 
 /* function to input value if it's correct or input and highlight as incorrect */
-function fillSquare(square) {
-    if (digitSelected && square.innerText == "" || digitSelected && square.classList.contains("error")) {
-        // pos: ["0","0"], ["0","1"], ... ["9","9"]
-        const pos = square.id.split("-")
-        const row = parseInt(pos[0])
-        const col = parseInt(pos[1])
-        const input = parseInt(digitSelected.id)
-        
-        if (solution[row][col] == input) { // correct
-            square.innerText = digitSelected.id
-            square.classList.remove("error")
-            squareSelected.classList.remove("square-selected") // unselect any squares
-            tally[parseInt(digitSelected.id)]++ // update tally
-            if (tally[parseInt(digitSelected.id)] == 9) { // all occurrences of the digit has been correctly placed
-                hideDigitSelected()
+function selectSquareMaybeFillSquare(square) {
+    if (digitSelected) {
+        if (square.innerText == "" || square.classList.contains("error")) {
+            // pos: ["0","0"], ["0","1"], ... ["9","9"]
+            const pos = square.id.split("-")
+            const row = parseInt(pos[0])
+            const col = parseInt(pos[1])
+            const input = parseInt(digitSelected.id)
+            
+            if (solution[row][col] == input) { // correct
+                square.innerText = digitSelected.id
+                square.classList.remove("error")
+                squareSelected.classList.remove("square-selected") // unselect any squares
+                tally[parseInt(digitSelected.id)]++ // update tally
+                if (tally[parseInt(digitSelected.id)] == 9) { // all occurrences of the digit has been correctly placed
+                    hideDigitSelected()
+                }
+            } else { // incorrect
+                square.innerText = digitSelected.id
+                square.classList.add("error")
+                updateErrors(errors + 1)
             }
-        } else { // incorrect
-            square.innerText = digitSelected.id
-            square.classList.add("error")
-            updateErrors(errors + 1)
         }
     }
 }
@@ -132,6 +135,13 @@ function selectDigit() {
         }
         digitSelected = this
         digitSelected.classList.add("digit-selected")
+    }
+    selectDigitMaybeFillSquare()
+}
+
+function selectDigitMaybeFillSquare() {
+    if (squareSelected) {
+        selectSquareMaybeFillSquare(squareSelected)
     }
 }
 
