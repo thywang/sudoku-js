@@ -123,10 +123,16 @@
 }
 
 /* additional features */
-.hide-digit {
+.hide {
     display: none;
 }
 
 .error {
     color: crimson;
+}
+
+.paused {
+    background-color: darkcyan;
+    /* text */
+    color: white;
 }

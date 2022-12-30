@@ -1,4 +1,5 @@
 import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
+import { resetTimer, displayTimer } from "./timer.js"
 
 /* global variable declarations */
 var digitSelected = null
@@ -22,7 +23,7 @@ function resetTally() {
 
 /* function to hide digit */
 function hideDigitSelected() {
-    digitSelected.classList.add("hide-digit")
+    digitSelected.classList.add("hide")
     digitSelected = null
 }
 
@@ -30,7 +31,7 @@ function hideDigitSelected() {
 function resetDigits() {
     const digits = document.querySelector("#digits")
     for (const digit of digits.childNodes) {
-        digit.classList.remove("hide-digit")
+        digit.classList.remove("hide")
         digit.classList.remove("digit-selected")
     }
     digitSelected = null
@@ -173,6 +174,9 @@ export function setGame() {
     updateErrors(0)
     resetTally()
     resetDigits()
+    resetTimer()
+
+    displayTimer()
 
     let puzzle = loadRandomBoard()
     fillBoard(puzzle)
@@ -182,5 +186,6 @@ export function setGame() {
 }
 
 export function solveGame() {
+    resetTimer(true)
     fillBoard(solution)
 }
