@@ -10,20 +10,32 @@
 </head>
 <body>
     <div class="sudoku-solver">
-        <main><h1>Sudoku</h1></main>
-        <br>
+        <div class="header">
+            <h1 id="title">Sudoku</h1>
+            <button type="button" id="dark-light-mode">Change Mode</button>
+        </div>
+        <hr>
         <div class="game-menu">
+            <div class="game-buttons">
+                <button type="button" id="music-button">Music</button>
+                <div class="difficulty-level">
+                    <button type="button" id="easy-level">Easy</button>
+                    <button type="button" id="medium-level">Medium</button>
+                    <button type="button" id="hard-level">Hard</button>
+                </div>
+                <button type="button" id="new-game-button">New Game</button>
+            </div>
             <div id="error-count"></div>
+            <div class="timer-and-solve-button">
+                <div class="timer">00:00</div>
+                <button type="button" id="pause-button">pause</button>
+                <button type="button" id="solve-button">Solve</button>
+            </div>
         </div>
         <br>
         <div class="sudoku-board" id="sudoku-board"></div>
         <br>
         <div class="digits" id="digits"></div>
-        <br>
-        <div class="game-button">
-            <button type="button" id="solve-button">solve</button>
-            <button type="button" id="new-game-button">new game</button>
-        </div>
     </div>
 </body>
 </html>

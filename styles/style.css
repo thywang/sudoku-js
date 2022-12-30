@@ -6,37 +6,58 @@
     border-spacing: 0;
 }
 
-main {
+/* header styling */
+.header {
     display: flex;
+    justify-content: space-between;
+    margin: 10px;
 }
 
+#title {
+    flex-basis: 60%;
+}
+
+/* game menu styling */
 .game-menu {
-    width: 450px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.game-buttons {
+    display: flex;
+    flex-basis: 30%;
+}
+
+.difficulty-level {
+    display: flex;
 }
 
 #error-count {
+    flex-basis: 10%;
+    display: flex;
     /* text */
     color: crimson;
     font-size: 20px;
+}
+
+.timer-and-solve-button {
+    flex-basis: 20%;
+    display: flex;
+}
+
+.timer {
+    /* text */
+    color: gray;
+    font-size: 20px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.game-button {
-    width: 450px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
+/* board styling */
 .sudoku-board {
     width: 450px;
     height: 450px;
+    margin: 20px auto 10px auto;
     cursor: default;
 
     /* create rows and cols */
