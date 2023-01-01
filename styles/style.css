@@ -1,3 +1,29 @@
+/* constants */
+:root {
+    /* light mode */
+    --font-color: #060607;
+    --bg-color: white;
+    --primary-color: #f8f9f9;
+    --secondary-color: #c7ccd1;
+    --hover-color: #e3e5e8;
+    --selected-color: #9099a4; /* darker secondary-color */
+    --icon-color: #23262a;
+    --digit-color: #4f5660; /* darker selected-color */
+    
+    /* dark mode */
+    --font-color-dark: #f6f6f7;
+    --bg-color-dark: #040405;
+    --primary-color-dark: #18191c;
+    --secondary-color-dark: #36393f;
+    --hover-color-dark: #202225;
+    --selected-color-dark: #4f545c;
+    --icon-color-dark: #dcddde;
+    --digit-color-dark: #72767d;
+
+    /* errors */
+    --error-color: #f2283c;
+}
+
 /* main functionalities */
 * {
     margin: 0 auto;
@@ -5,12 +31,18 @@
     box-sizing: border-box;
     border-spacing: 0;
 }
+  
+button {
+    cursor: pointer;
+}
 
 /* header styling */
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    padding: 10px;
+    color: var(--font-color);
+    border-bottom: 1px var(--secondary-color) solid;
 }
 
 #title {
@@ -21,34 +53,50 @@
 .game-menu {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 10px;
 }
 
 .game-buttons {
     display: flex;
     flex-basis: 30%;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* music */
+#music::before {
+    content: "music_off";
+    color: var(--icon-color);
+}
+
+#music.material-icons.play-bgm::before {
+    content: "music_note";
+    color: var(--icon-color);
 }
 
 .difficulty-level {
     display: flex;
 }
 
+/* mistakes made */
 #error-count {
     flex-basis: 10%;
     display: flex;
     /* text */
-    color: crimson;
-    font-size: 20px;
+    font-size: 18px;
+    color: var(--font-color);
 }
 
-.timer-and-solve-button {
-    flex-basis: 20%;
+.timer-and-pause-button {
+    flex-basis: 7%;
     display: flex;
+    align-items: center;
 }
 
 .timer {
     /* text */
-    color: gray;
+    color: var(--selected-color);
     font-size: 20px;
     text-align: center;
 }
@@ -68,7 +116,7 @@
 .square {
     width: 50px; /* 9 squares fit in row */
     height: 50px; /* 9 squares fit in col */
-    border: 0.5px dimgray solid;
+    border: 0.5px var(--selected-color) solid;
 
     /* text */
     font-size: 20px;
@@ -80,18 +128,18 @@
 
 /* top right bottom left */
 .thicker-border-right {
-    border-right: 2px black solid;
+    border-right: 2px var(--icon-color) solid;
 }
 .thicker-border-below {
-    border-bottom: 2px black solid;
+    border-bottom: 2px var(--icon-color) solid;
 }
 
 .prefilled {
-    background-color: whitesmoke;
+    background-color: var(--primary-color);
 }
 
 .square-selected {
-    background-color: lightgray;
+    background-color: var(--secondary-color);
 }
 
 .digits {
@@ -105,21 +153,29 @@
 .digit {
     width: 50px;
     height: 50px;
-    border: 1px white;
     margin: 0px;
     cursor: pointer;
 
     /* text */
     font-size: 30px;
-    color: darkblue;
+    color: var(--digit-color);
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* for hover effects */
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.digit:hover {
+    opacity: 1;
 }
 
 .digit-selected {
-    background-color: lightgray;
+    opacity: 1;
+    background-color: var(--hover-color);
 }
 
 /* additional features */
@@ -127,12 +183,54 @@
     display: none;
 }
 
+/* error made on the board */
 .error {
-    color: crimson;
+    color: var(--error-color);
 }
 
-.paused {
-    background-color: darkcyan;
-    /* text */
-    color: white;
+/* pause resume button */
+#pause-resume-button {
+    cursor: pointer;
+    /* for hover effects */
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+#pause-resume-button:hover {
+    opacity: 1;
+}
+
+#pause-resume-button::before {
+    content: "pause_circle_filled";
+    color: var(--selected-color);
+}
+
+#pause-resume-button.material-icons.paused::before {
+    content: "play_circle_filled";
+    color: var(--digit-color);
+}
+
+/* toggle dark mode */
+/* toggle button */
+#toggle {
+    cursor: pointer;
+}
+
+#toggle::before {
+    content: "light_mode";
+    color: var(--icon-color);
+}
+
+.sudoku-solver.dark #toggle::before {
+    content: "dark_mode";
+    color: var(--icon-color-dark);
+}
+
+.sudoku-solver {
+    height: 100%;
+    background-color: var(--bg-color);
+}
+.sudoku-solver.dark {
+    height: 100%;
+    background-color: var(--bg-color-dark);
 }

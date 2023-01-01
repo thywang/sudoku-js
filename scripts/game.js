@@ -13,7 +13,7 @@ const error = document.querySelector("#error-count")
 /* error functions */
 function updateErrors(value) {
     errors = value
-    error.innerText = errors
+    error.innerText = "Mistakes: " + errors
 }
 
 /* tally functions */

@@ -5,37 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
+    <!-- ========================= BEGIN CSS STYLE ========================= -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@4.2.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-UkVD+zxJKGsZP3s/JuRzapi4dQrDDuEf/kHphzg8P3v8wuQ6m9RLjTkPGeFcglQU" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style.css">
+    <!-- ========================= BEGIN JS SCRIPT ========================= -->
     <script type="module" defer src="scripts/app.js"></script>
 </head>
-<body>
-    <div class="sudoku-solver">
+<body class="sudoku-solver">
         <div class="header">
             <h1 id="title">Sudoku</h1>
-            <button type="button" id="dark-light-mode">Change Mode</button>
+            <div class="material-icons" id="toggle"></div>
         </div>
-        <hr>
         <div class="game-menu">
             <div class="game-buttons">
-                <button type="button" id="music-button">Music</button>
-                <div class="difficulty-level">
-                    <button type="button" id="easy-level">Easy</button>
-                    <button type="button" id="medium-level">Medium</button>
-                    <button type="button" id="hard-level">Hard</button>
+                <div class="material-icons" id="music"></div>
+                <div class="difficulty-level" class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="btnradio" id="easy-level" autocomplete="off" checked>
+                    <label class="btn btn-light rounded-0" for="easy-level">Easy</label>
+                  
+                    <input type="radio" class="btn-check" name="btnradio" id="medium-level" autocomplete="off">
+                    <label class="btn btn-light rounded-0" for="medium-level">Medium</label>
+                  
+                    <input type="radio" class="btn-check" name="btnradio" id="hard-level" autocomplete="off">
+                    <label class="btn btn-light rounded-0" for="hard-level">Hard</label>
                 </div>
-                <button type="button" id="new-game-button">New Game</button>
+                <button type="button" class="btn btn-light" id="new-game-button">New Game</button>
             </div>
             <div id="error-count"></div>
-            <div class="timer-and-solve-button">
+            <div class="timer-and-pause-button">
                 <div class="timer">00:00</div>
-                <button type="button" id="pause-resume-button">pause</button>
-                <button type="button" id="solve-button">Solve</button>
+                <div class="material-icons" id="pause-resume-button"></div>
             </div>
+            <div><button type="button" class="btn btn-light" id="solve-button">Solve</button></div>
         </div>
         <br>
         <div class="sudoku-board" id="sudoku-board"></div>
         <br>
         <div class="digits" id="digits"></div>
-    </div>
 </body>
 </html>

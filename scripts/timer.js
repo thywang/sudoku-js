@@ -1,6 +1,6 @@
 
 const pauseResumeButton = document.querySelector("#pause-resume-button")
-let timer = document.querySelector('.timer')
+let timer = document.querySelector(".timer")
 let [minutes, seconds] = [0, 0]
 let interval = null
 
@@ -14,11 +14,9 @@ export function displayTimer() {
 export function pauseResumeTimer() {
     if (pauseResumeButton.classList.contains("paused")) {
         pauseResumeButton.classList.remove("paused")
-        pauseResumeButton.innerText = "pause" // click button again to pause
         displayTimer()
     } else {
         pauseResumeButton.classList.add("paused")
-        pauseResumeButton.innerText = "resume" // click button again to resume
         clearInterval(interval)
     }
 }
@@ -31,7 +29,6 @@ export function resetTimer(hideButton = false) {
     }
     /* restore button to default (i.e. pause) */
     pauseResumeButton.classList.remove("paused")
-    pauseResumeButton.innerText = "pause" // click button again to pause
     clearInterval(interval)
     minutes = 0
     seconds = 0
