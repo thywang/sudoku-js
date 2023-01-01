@@ -1,12 +1,12 @@
 import { drawGame, setGame, solveGame} from "./game.js"
 import { pauseResumeTimer } from "./timer.js"
 import { playBgm } from "./music.js"
+import { toggle } from "./toggle.js"
 
 const musicButton = document.querySelector("#music")
 const solveButton = document.querySelector("#solve-button")
 const newGameButton = document.querySelector("#new-game-button")
 const pauseResumeButton = document.querySelector("#pause-resume-button")
-const sudoku_solver = document.querySelector(".sudoku-solver")
 const toggleButton = document.querySelector("#toggle")
 
 function main() {
@@ -16,7 +16,7 @@ function main() {
     solveButton.addEventListener("click", () => solveGame())
     newGameButton.addEventListener("click", () => setGame())
     pauseResumeButton.addEventListener("click", () => pauseResumeTimer())
-    toggleButton.addEventListener("click", () => sudoku_solver.classList.toggle("dark"))
+    toggleButton.addEventListener("click", () => toggle())
 
 }
 

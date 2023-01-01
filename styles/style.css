@@ -11,14 +11,15 @@
     --digit-color: #4f5660; /* darker selected-color */
     
     /* dark mode */
-    --font-color-dark: #f6f6f7;
-    --bg-color-dark: #040405;
-    --primary-color-dark: #18191c;
-    --secondary-color-dark: #36393f;
-    --hover-color-dark: #202225;
-    --selected-color-dark: #4f545c;
-    --icon-color-dark: #dcddde;
-    --digit-color-dark: #72767d;
+    --font-color-dark: #f1f3f3;
+    --number-color-dark: #c5c7c9;
+    --bg-color-dark: #2b303c;
+    --primary-color-dark: #353c47;
+    --secondary-color-dark: #58627c;
+    --hover-color-dark: #3f4654;
+    --selected-color-dark: #c5cad6;
+    --icon-color-dark: #e3e4e8;
+    --digit-color-dark: #f1f3f4;
 
     /* errors */
     --error-color: #f2283c;
@@ -43,6 +44,13 @@ button {
     padding: 10px;
     color: var(--font-color);
     border-bottom: 1px var(--secondary-color) solid;
+}
+
+/* dark mode header */
+.sudoku-solver.dark .header {
+    background-color: var(--bg-color-dark);
+    color: var(--font-color-dark);
+    border-bottom: 1px var(--secondary-color-dark) solid;
 }
 
 #title {
@@ -72,7 +80,11 @@ button {
 
 #music.material-icons.play-bgm::before {
     content: "music_note";
-    color: var(--icon-color);
+}
+
+/* dark mode music button */
+.sudoku-solver.dark #music::before {
+    color: var(--icon-color-dark);
 }
 
 .difficulty-level {
@@ -88,6 +100,11 @@ button {
     color: var(--font-color);
 }
 
+/* dark mode error count */
+.sudoku-solver.dark #error-count {
+    color: var(--font-color-dark);
+}
+
 .timer-and-pause-button {
     flex-basis: 7%;
     display: flex;
@@ -99,6 +116,11 @@ button {
     color: var(--selected-color);
     font-size: 20px;
     text-align: center;
+}
+
+/* dark mode timer */
+.sudoku-solver.dark .timer {
+    color: var(--selected-color-dark);
 }
 
 /* board styling */
@@ -119,11 +141,23 @@ button {
     border: 0.5px var(--selected-color) solid;
 
     /* text */
+    color: var(--font-color);
     font-size: 20px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* dark mode square */
+.sudoku-solver.dark .square {
+    color: var(--number-color-dark);
+    border-color: var(--icon-color-dark);
+}
+
+/* error made on the board */
+.sudoku-solver.dark .error {
+    color: var(--error-color);
 }
 
 /* top right bottom left */
@@ -134,12 +168,28 @@ button {
     border-bottom: 2px var(--icon-color) solid;
 }
 
+/* dark mode thicker borders */
+.sudoku-solver.dark .thicker-border-right {
+    border-right-color: var(--icon-color-dark);
+}
+.sudoku-solver.dark .thicker-border-below {
+    border-bottom-color: var(--icon-color-dark);
+}
+
 .prefilled {
     background-color: var(--primary-color);
+}
+/* dark mode prefilled */
+.sudoku-solver.dark .prefilled {
+    background-color: var(--primary-color-dark) ;
 }
 
 .square-selected {
     background-color: var(--secondary-color);
+}
+/* dark mode selected square */
+.sudoku-solver.dark .square-selected {
+    background-color: var(--secondary-color-dark);
 }
 
 .digits {
@@ -168,6 +218,10 @@ button {
     opacity: 0.6;
     transition: 0.3s;
 }
+/* dark mode digit */
+.sudoku-solver.dark .digit {
+    color: var(--digit-color-dark);
+}
 
 .digit:hover {
     opacity: 1;
@@ -176,6 +230,10 @@ button {
 .digit-selected {
     opacity: 1;
     background-color: var(--hover-color);
+}
+/* dark mode selected digit */
+.sudoku-solver.dark .digit-selected {
+    background-color: var(--hover-color-dark);
 }
 
 /* additional features */
@@ -209,6 +267,13 @@ button {
     content: "play_circle_filled";
     color: var(--digit-color);
 }
+/* dark mode pause-resume-button */
+.sudoku-solver.dark #pause-resume-button::before {
+    color: var(--digit-color-dark);
+}
+.sudoku-solver.dark #pause-resume-button.material-icons.paused::before {
+    color: var(--icon-color-dark);
+}
 
 /* toggle dark mode */
 /* toggle button */
@@ -217,12 +282,12 @@ button {
 }
 
 #toggle::before {
-    content: "light_mode";
+    content: "dark_mode";
     color: var(--icon-color);
 }
 
 .sudoku-solver.dark #toggle::before {
-    content: "dark_mode";
+    content: "light_mode";
     color: var(--icon-color-dark);
 }
 
