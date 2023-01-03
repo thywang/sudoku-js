@@ -65,6 +65,68 @@ function parseDataIntoPuzzles(data, difficulty = "easy") {
     }
 }
 
+/* valid transformations on Sudoku board */
+// function to rotate a matrix once clockwise
+function rotateMatrix(matrix) {
+    const n = matrix.length
+
+    // create temp board of size n x n
+    let temp = Array.from(Array(n), () => Array(n))
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            // [i][j] => [i][n-(i + 1)]
+            // e.g. assuming 9x9 matrix, array[0][0] => array[0][8]
+            temp[i][n - (i + 1)] = matrix[i][j]
+        }
+    }
+    return temp
+}
+// function to map all the numbers in a matrix to other numbers (e.g. '1's => '3's, '3's => '6's, '6's => ...)
+function convertValuesInMatrix(matrix) {
+    const arr = Array.from(Array(9), (e, i) => i + 1) // [1, 2, 3, ... , 9]
+    const shuffled = shuffle(arr)
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            // assume values in matrix range from 1 to 9
+            let idx = matrix[i][j] - 1 // and -1 because indices start from 0, not 1
+            matrix[i][j] = shuffled[idx] || 0
+        }
+    }
+    return matrix // now transformed
+}
+
+// function to shuffle an array using the Fisher-Yates method
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let swapIdx = Math.floor(Math.random() * (i + 1)) // generate random integer between 0 and i
+        let temp = arr[i]
+        arr[i] = arr[swapIdx]
+        arr[swapIdx] = temp
+    }
+    return arr // now shuffled
+}
+
+// function to shuffle any 2-3 rows or cols that span the same 3 boxes
+function shuffleRows(matrix) {
+    return [
+        shuffle(matrix.slice(0, 3)),
+        shuffle(matrix.slice(3, 6)),
+        shuffle(matrix.slice(6))
+    ].flat() // flattens array by one level by default
+}
+
+function shuffleCols(matrix) {
+    // rotate matrix once
+    matrix = rotateMatrix(matrix)
+    // use shuffleRows
+    matrix = shuffleRows(matrix)
+    // rotate 3 more times back to original orientation
+    for (let i = 0; i < 3; i++) {
+        matrix = rotateMatrix(matrix)
+    }
+}
+
 export function initAllPuzzles() {
     readPuzzleTextFile(EASY, parseDataIntoPuzzles, "easy")
     readPuzzleTextFile(MEDIUM, parseDataIntoPuzzles, "medium")
@@ -100,6 +162,7 @@ export function loadRandomBoard() {
     }
     let idx = Math.floor(Math.random() * chosenPuzzles.length)
     let chosenBoard = chosenPuzzles[idx]
+    // apply a random transformation to this board
     return chosenBoard
 }
 
