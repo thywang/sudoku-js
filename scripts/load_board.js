@@ -75,12 +75,12 @@ function rotateMatrix(matrix) {
 
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-            // [i][j] => [i][n-(i + 1)]
+            // [i][j] => [j][n-(i + 1)]
             // e.g. assuming 9x9 matrix, array[0][0] => array[0][8]
-            temp[i][n - (i + 1)] = matrix[i][j]
+            temp[j][n - (i + 1)] = matrix[i][j]
         }
     }
-    return temp
+    return temp // now rotated
 }
 // function to map all the numbers in a matrix to other numbers (e.g. '1's => '3's, '3's => '6's, '6's => ...)
 function convertValuesInMatrix(matrix) {
@@ -125,6 +125,7 @@ function shuffleCols(matrix) {
     for (let i = 0; i < 3; i++) {
         matrix = rotateMatrix(matrix)
     }
+    return matrix // now shuffled
 }
 
 export function initAllPuzzles() {
@@ -163,6 +164,7 @@ export function loadRandomBoard() {
     let idx = Math.floor(Math.random() * chosenPuzzles.length)
     let chosenBoard = chosenPuzzles[idx]
     // apply a random transformation to this board
+    // let chosenBoard = shuffleCols(chosenPuzzles[idx])
     return chosenBoard
 }
 
