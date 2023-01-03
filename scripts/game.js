@@ -1,4 +1,4 @@
-import { loadRandomBoard, loadSolvedBoard } from "./load_board.js"
+import { loadRandomBoard, loadSolvedBoard, initAllPuzzles } from "./load_board.js"
 import { resetTimer, displayTimer } from "./timer.js"
 
 /* global variable declarations */
@@ -175,6 +175,7 @@ export function setGame() {
     resetTally()
     resetDigits()
     resetTimer()
+    initAllPuzzles()
 
     displayTimer()
 
