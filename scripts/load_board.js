@@ -67,7 +67,7 @@ function parseDataIntoPuzzles(data, difficulty = "easy") {
 
 /* valid transformations on Sudoku board */
 // function to rotate a matrix once clockwise
-function rotateMatrix(matrix) {
+const rotateMatrix = (matrix) => {
     const n = matrix.length
 
     // create temp board of size n x n
@@ -83,7 +83,7 @@ function rotateMatrix(matrix) {
     return temp // now rotated
 }
 // function to map all the numbers in a matrix to other numbers (e.g. '1's => '3's, '3's => '6's, '6's => ...)
-function convertValuesInMatrix(matrix) {
+const convertValuesInMatrix = (matrix) => {
     const arr = Array.from(Array(9), (e, i) => i + 1) // [1, 2, 3, ... , 9]
     const shuffled = shuffle(arr)
     for (let i = 0; i < matrix.length; i++) {
@@ -108,7 +108,7 @@ function shuffle(arr) {
 }
 
 // function to shuffle any 2-3 rows or cols that span the same 3 boxes
-function shuffleRows(matrix) {
+const shuffleRows = (matrix) => {
     return [
         shuffle(matrix.slice(0, 3)),
         shuffle(matrix.slice(3, 6)),
@@ -116,7 +116,7 @@ function shuffleRows(matrix) {
     ].flat() // flattens array by one level by default
 }
 
-function shuffleCols(matrix) {
+const shuffleCols = (matrix) => {
     // rotate matrix once
     matrix = rotateMatrix(matrix)
     // use shuffleRows
@@ -128,13 +128,7 @@ function shuffleCols(matrix) {
     return matrix // now shuffled
 }
 
-export function initAllPuzzles() {
-    readPuzzleTextFile(EASY, parseDataIntoPuzzles, "easy")
-    readPuzzleTextFile(MEDIUM, parseDataIntoPuzzles, "medium")
-    readPuzzleTextFile(HARD, parseDataIntoPuzzles, "hard")
-}
-
-export function loadRandomBoard() {
+function getSelectedDifficulty() {
     const radioButtons = document.querySelectorAll('input[name="btnradio"]');
 
     let selectedDifficulty
@@ -144,7 +138,29 @@ export function loadRandomBoard() {
             break
         }
     }
-    switch(selectedDifficulty) {
+    return selectedDifficulty
+}
+
+function maybeApplyTransformation(chosenBoard) {
+    const transformations = [ rotateMatrix, convertValuesInMatrix, shuffleRows, shuffleCols ]
+    let idx = Math.floor(Math.random() * (transformations.length + 1)) // one more than existing index to represent no transformations
+    const transform = transformations[idx] || null
+    if (transform) {
+        console.log(transform.name + " applied")
+        return transform(chosenBoard)
+    }
+    console.log("no transformation applied")
+    return chosenBoard
+}
+
+export function initAllPuzzles() {
+    readPuzzleTextFile(EASY, parseDataIntoPuzzles, "easy")
+    readPuzzleTextFile(MEDIUM, parseDataIntoPuzzles, "medium")
+    readPuzzleTextFile(HARD, parseDataIntoPuzzles, "hard")
+}
+
+export function loadRandomBoard() {
+    switch(getSelectedDifficulty()) {
         case "easy-level":
             console.log("easy level")
             chosenPuzzles = easyPuzzles
@@ -162,10 +178,10 @@ export function loadRandomBoard() {
             chosenPuzzles = easyPuzzles
     }
     let idx = Math.floor(Math.random() * chosenPuzzles.length)
-    let chosenBoard = chosenPuzzles[idx]
+    // let chosenBoard = chosenPuzzles[idx]
     // apply a random transformation to this board
     // let chosenBoard = shuffleCols(chosenPuzzles[idx])
-    return chosenBoard
+    return maybeApplyTransformation(chosenPuzzles[idx])
 }
 
 export function loadSolvedBoard(puzzle) {
