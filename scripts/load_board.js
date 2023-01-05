@@ -97,7 +97,7 @@ const convertValuesInMatrix = (matrix) => {
 }
 
 // function to shuffle an array using the Fisher-Yates method
-function shuffle(arr) {
+export function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         let swapIdx = Math.floor(Math.random() * (i + 1)) // generate random integer between 0 and i
         let temp = arr[i]
@@ -178,9 +178,7 @@ export function loadRandomBoard() {
             chosenPuzzles = easyPuzzles
     }
     let idx = Math.floor(Math.random() * chosenPuzzles.length)
-    // let chosenBoard = chosenPuzzles[idx]
     // apply a random transformation to this board
-    // let chosenBoard = shuffleCols(chosenPuzzles[idx])
     return maybeApplyTransformation(chosenPuzzles[idx])
 }
 
