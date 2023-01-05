@@ -5,7 +5,7 @@ const PATH_PREFIX = "assets/bgm/"
 const PATH_SUFFIX = ".mp3"
 const songs = [ 
     "Marshmallow (Prod. by Lukrembo)",
-    "Bread (Prod. by Lukrembo",
+    "Bread (Prod. by Lukrembo)",
     "By Your Side.",
     "See You Tomorrow",
     "Hanging With The Boys",
