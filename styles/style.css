@@ -33,7 +33,7 @@
     border-spacing: 0;
 }
   
-button {
+button, .material-icons {
     cursor: pointer;
 }
 
@@ -57,19 +57,35 @@ button {
     flex-basis: 60%;
 }
 
+@media only screen and (min-width: 768px) {
+    .settings {
+        display: flex;
+        justify-content: space-between;
+        width: 10%;
+    }
+}
+
 /* game menu styling */
 .game-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin: 10px;
 }
 
 .game-buttons {
     display: flex;
-    flex-basis: 30%;
+    flex-grow: 1;
     align-items: center;
+    margin: 10px;
     cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+    .game-buttons {
+        flex-grow: 0.1;
+    }
 }
 
 /* music */
@@ -93,11 +109,19 @@ button {
 
 /* mistakes made */
 #error-count {
-    flex-basis: 10%;
     display: flex;
     /* text */
-    font-size: 18px;
+    font-size: 16px;
     color: var(--font-color);
+}
+
+@media only screen and (min-width: 768px) {
+    #error-count {
+        flex-grow: 0.5;
+        justify-content: center;
+        /* text */
+        font-size: 18px;
+    }
 }
 
 /* dark mode error count */
@@ -106,9 +130,16 @@ button {
 }
 
 .timer-and-pause-button {
-    flex-basis: 7%;
+    width: 80px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (min-width: 768px) {
+    .timer-and-pause-button {
+        width: 100px;
+    }
 }
 
 .timer {
@@ -125,8 +156,8 @@ button {
 
 /* board styling */
 .sudoku-board {
-    width: 450px;
-    height: 450px;
+    width: 360px;
+    height: 360px;
     margin: 20px auto 10px auto;
     cursor: default;
 
@@ -136,9 +167,9 @@ button {
 }
 
 .square {
-    width: 50px; /* 9 squares fit in row */
-    height: 50px; /* 9 squares fit in col */
-    border: 0.5px var(--selected-color) solid;
+    width: 40px; /* 9 squares fit in row */
+    height: 40px; /* 9 squares fit in col */
+    border: 0.2px var(--selected-color) solid;
 
     /* text */
     color: var(--font-color);
@@ -147,6 +178,20 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+    /* board styling */
+    .sudoku-board {
+        width: 450px;
+        height: 450px;
+    }
+
+    .square {
+        width: 50px; /* 9 squares fit in row */
+        height: 50px; /* 9 squares fit in col */
+        border: 0.5px var(--selected-color) solid;
+    }
 }
 
 /* dark mode square */
@@ -192,17 +237,18 @@ button {
     background-color: var(--secondary-color-dark);
 }
 
+/* digits styling */
 .digits {
-    width: 450px;
-    height: 50px;
+    width: 360px;
+    height: 40px;
 
     display: flex;
     flex-wrap: wrap;
 }
 
 .digit {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin: 0px;
     cursor: pointer;
 
@@ -213,18 +259,33 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* for hover effects */
     opacity: 0.6;
-    transition: 0.3s;
 }
+
+@media only screen and (min-width: 768px) {
+    .digits {
+        width: 450px;
+        height: 50px;
+    }
+    
+    .digit {
+        width: 50px;
+        height: 50px;
+    }
+}
+
 /* dark mode digit */
 .sudoku-solver.dark .digit {
     color: var(--digit-color-dark);
 }
 
-.digit:hover {
-    opacity: 1;
+@media (hover: hover) {
+    .digit {
+        transition: 0.3s;
+    }
+    .digit:hover {
+        opacity: 1;
+    }
 }
 
 .digit-selected {
@@ -249,13 +310,17 @@ button {
 /* pause resume button */
 #pause-resume-button {
     cursor: pointer;
-    /* for hover effects */
     opacity: 0.6;
-    transition: 0.3s;
 }
 
-#pause-resume-button:hover {
-    opacity: 1;
+@media (hover: hover) {
+    #pause-resume-button {
+        /* for hover effects */
+        transition: 0.3s;
+    }
+    #pause-resume-button:hover {
+        opacity: 1;
+    }
 }
 
 #pause-resume-button::before {
@@ -296,6 +361,5 @@ button {
     background-color: var(--bg-color);
 }
 .sudoku-solver.dark {
-    height: 100%;
     background-color: var(--bg-color-dark);
 }
